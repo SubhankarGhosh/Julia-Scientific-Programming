@@ -1,0 +1,1668 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Week3\_Honors1-Types}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c}{\PYZsh{} Setting up a custom stylesheet in IJulia}
+        \PY{n}{file} \PY{o}{=} \PY{n}{open}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{s}\PY{l+s}{t}\PY{l+s}{y}\PY{l+s}{l}\PY{l+s}{e}\PY{l+s}{.}\PY{l+s}{c}\PY{l+s}{s}\PY{l+s}{s}\PY{l+s}{\PYZdq{}}\PY{p}{)} \PY{c}{\PYZsh{} A .css file in the same folder as this notebook file}
+        \PY{n}{styl} \PY{o}{=} \PY{n}{readstring}\PY{p}{(}\PY{n}{file}\PY{p}{)} \PY{c}{\PYZsh{} Read the file}
+        \PY{k+kt}{HTML}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s+si}{\PYZdl{}styl}\PY{l+s}{\PYZdq{}}\PY{p}{)} \PY{c}{\PYZsh{} Output as HTML}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}1}]:} HTML\{String\}("<link href='http://fonts.googleapis.com/css?family=Alegreya+Sans:100,300,400,500,700,800,900,100italic,300italic,400italic,500italic,700italic,800italic,900italic' rel='stylesheet' type='text/css'>\textbackslash{}r\textbackslash{}n<link href='http://fonts.googleapis.com/css?family=Arvo:400,700,400italic' rel='stylesheet' type='text/css'>\textbackslash{}r\textbackslash{}n<link href='http://fonts.googleapis.com/css?family=PT+Mono' rel='stylesheet' type='text/css'>\textbackslash{}r\textbackslash{}n<link href='http://fonts.googleapis.com/css?family=Shadows+Into+Light' rel='stylesheet' type='text/css'>\textbackslash{}r\textbackslash{}n<link href='http://fonts.googleapis.com/css?family=Philosopher:400,700,400italic,700italic' rel='stylesheet' type='text/css'>\textbackslash{}r\textbackslash{}n\textbackslash{}r\textbackslash{}n<style>\textbackslash{}r\textbackslash{}n\textbackslash{}r\textbackslash{}n@font-face \{\textbackslash{}r\textbackslash{}n    font-family: \textbackslash{}"Computer Modern\textbackslash{}";\textbackslash{}r\textbackslash{}n    src: url('http://mirrors.ctan.org/fonts/cm-unicode/fonts/otf/cmunss.otf');\textbackslash{}r\textbackslash{}n\}\textbackslash{}r\textbackslash{}n\textbackslash{}r\textbackslash{}n\#notebook\_panel \{ /* main background */\textbackslash{}r\textbackslash{}n    background: \#ddd;\textbackslash{}r\textbackslash{}n    color: \#000000;\textbackslash{}r\textbackslash{}n\}\textbackslash{}r\textbackslash{}n\textbackslash{}r\textbackslash{}n\textbackslash{}r\textbackslash{}n\textbackslash{}r\textbackslash{}n/* Formatting for header cells */\textbackslash{}r\textbackslash{}n.text\_cell\_render h1 \{\textbackslash{}r\textbackslash{}n    font-family: 'Philosopher', sans-serif;\textbackslash{}r\textbackslash{}n    font-weight: 400;\textbackslash{}r\textbackslash{}n    font-size: 2.2em;\textbackslash{}r\textbackslash{}n    line-height: 100\%;\textbackslash{}r\textbackslash{}n    color: rgb(0, 80, 120);\textbackslash{}r\textbackslash{}n    margin-bottom: 0.1em;\textbackslash{}r\textbackslash{}n    margin-top: 0.1em;\textbackslash{}r\textbackslash{}n    display: block;\textbackslash{}r\textbackslash{}n\}\textbackslash{}t\textbackslash{}r\textbackslash{}n.text\_cell\_render h2 \{\textbackslash{}r\textbackslash{}n    font-family: 'Philosopher', serif;\textbackslash{}r\textbackslash{}n    font-weight: 400;\textbackslash{}r\textbackslash{}n    font-size: 1.9em;\textbackslash{}r\textbackslash{}n    line-height: 100\%;\textbackslash{}r\textbackslash{}n    color: rgb(200,100,0);\textbackslash{}r\textbackslash{}n    margin-bottom: 0.1em;\textbackslash{}r\textbackslash{}n    margin-top: 0.1em;\textbackslash{}r\textbackslash{}n    display: block;\textbackslash{}r\textbackslash{}n\}\textbackslash{}t\textbackslash{}r\textbackslash{}n\textbackslash{}r\textbackslash{}n.text\_cell\_render h3 \{\textbackslash{}r\textbackslash{}n    font-family: 'Philosopher', serif;\textbackslash{}r\textbackslash{}n    margin-top:12px;\textbackslash{}r\textbackslash{}n    margin-bottom: 3px;\textbackslash{}r\textbackslash{}n    font-style: italic;\textbackslash{}r\textbackslash{}n    color: rgb(94,127,192);\textbackslash{}r\textbackslash{}n\}\textbackslash{}r\textbackslash{}n\textbackslash{}r\textbackslash{}n.text\_cell\_render h4 \{\textbackslash{}r\textbackslash{}n    font-family: 'Philosopher', serif;\textbackslash{}r\textbackslash{}n\}\textbackslash{}r\textbackslash{}n\textbackslash{}r\textbackslash{}n.text\_cell\_render h5 \{\textbackslash{}r\textbackslash{}n    font-family: 'Alegreya Sans', sans-serif;\textbackslash{}r\textbackslash{}n    font-weight: 300;\textbackslash{}r\textbackslash{}n    font-size: 16pt;\textbackslash{}r\textbackslash{}n    color: grey;\textbackslash{}r\textbackslash{}n    font-style: italic;\textbackslash{}r\textbackslash{}n    margin-bottom: .1em;\textbackslash{}r\textbackslash{}n    margin-top: 0.1em;\textbackslash{}r\textbackslash{}n    display: block;\textbackslash{}r\textbackslash{}n\}\textbackslash{}r\textbackslash{}n\textbackslash{}r\textbackslash{}n.text\_cell\_render h6 \{\textbackslash{}r\textbackslash{}n    font-family: 'PT Mono', sans-serif;\textbackslash{}r\textbackslash{}n    font-weight: 300;\textbackslash{}r\textbackslash{}n    font-size: 10pt;\textbackslash{}r\textbackslash{}n    color: grey;\textbackslash{}r\textbackslash{}n    margin-bottom: 1px;\textbackslash{}r\textbackslash{}n    margin-top: 1px;\textbackslash{}r\textbackslash{}n\}\textbackslash{}r\textbackslash{}n\textbackslash{}r\textbackslash{}n.CodeMirror\{\textbackslash{}r\textbackslash{}n        font-family: \textbackslash{}"PT Mono\textbackslash{}";\textbackslash{}r\textbackslash{}n        font-size: 100\%;\textbackslash{}r\textbackslash{}n\}\textbackslash{}r\textbackslash{}n\textbackslash{}r\textbackslash{}n</style>\textbackslash{}r\textbackslash{}n\textbackslash{}r\textbackslash{}n")
+\end{Verbatim}
+            
+    \section{Types}\label{types}
+
+    In this lesson
+
+    \begin{itemize}
+\tightlist
+\item
+  Section \ref{introduction}
+\item
+  Section \ref{importing-the-packages-for-this-lesson}
+\item
+  Section \ref{outcomes}
+\item
+  Section \ref{the-type-system-in-julia}
+\item
+  Section \ref{type-creation}
+\item
+  Section \ref{convertion-and-promotion}
+\item
+  Section \ref{parametrizing-a-type}
+\item
+  Section \ref{the-equality-of-values}
+\item
+  Section \ref{defining-methods-for-functions-that-will-use-user-types}
+\item
+  Section \ref{constraining-field-values}
+\item
+  Section \ref{more-complex-parameters}
+\item
+  Section \ref{screen-output-of-a-user-defined-type}
+\end{itemize}
+
+    Introduction
+
+    A computer variable, which is a space in memory, holds values of
+different types, i.e. integers, floating point values, and strings. In
+some languages the type of the value to be held inside of a variable
+must be explicitely declared. These languages are termed
+\emph{statically typed}. In \emph{dynamically typed} languages nothing
+is known about the type of the value held inside the variable until
+runtime. Being able to write code operating on different types is termed
+\emph{polymorphism}.
+
+    Julia is a dynamically typed language, yet it is possible to declare a
+type for values as well. Declaring a type allows for code that is clear
+to understand. As an assertion it can help to confirm that your code is
+working as expected. It can also allow for faster code execution by
+providing the compiler with extra information.
+
+    Section \ref{in-this-lesson}
+
+    Outcomes
+
+    After successfully completing this lecture, you will be able to:
+
+\begin{itemize}
+\tightlist
+\item
+  Understand the Julia type system
+\item
+  Create your own user-defined types
+\item
+  Parametrize your types
+\item
+  Overload methods for Julia functions so that they can use your types
+\end{itemize}
+
+    Section \ref{in-this-lesson}
+
+    The type system in Julia
+
+    Julia holds a type hierarchy that flows like the branches of a tree.
+Right at the top we have a type called \texttt{Any}. All types are
+subtypes of this type. Right at the final tip of the branches we have
+concrete types. They can hold values. Supertypes of these concrete types
+are called abtsract types and they cannot hold values, i.e. we cannot
+create an instance of an abstract type.
+
+    We can use Julia to see if types are subtypes of a supertype.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c}{\PYZsh{} Is Number a subtype of Any?}
+        \PY{k+kt}{Number} \PY{o}{\PYZlt{}:} \PY{k+kt}{Any}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:} true
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c}{\PYZsh{} Is Float 64 a subtype of AbstractFloat?}
+        \PY{k+kt}{Float64} \PY{o}{\PYZlt{}:} \PY{k+kt}{AbstractFloat}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} true
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c}{\PYZsh{} The subtypes of Any}
+        \PY{n}{subtypes}\PY{p}{(}\PY{k+kt}{Any}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}4}]:} 295-element Array\{Union\{DataType, UnionAll\},1\}:
+         AbstractArray              
+         AbstractChannel            
+         AbstractRNG                
+         AbstractSerializer         
+         AbstractSet                
+         AbstractString             
+         Any                        
+         Associative                
+         Base.AbstractCartesianIndex
+         Base.AbstractCmd           
+         Base.AsyncCollector        
+         Base.AsyncCollectorState   
+         Base.AsyncCondition        
+         ⋮                          
+         TypeVar                    
+         UniformScaling             
+         Val                        
+         Vararg                     
+         VecElement                 
+         VersionNumber              
+         Void                       
+         WeakRef                    
+         WorkerConfig               
+         ZMQ.Context                
+         ZMQ.MsgPadding             
+         ZMQ.Socket                 
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c}{\PYZsh{} Subtypes of AbstractString}
+        \PY{n}{subtypes}\PY{p}{(}\PY{k+kt}{AbstractString}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:} 6-element Array\{Union\{DataType, UnionAll\},1\}:
+         Base.SubstitutionString
+         Base.Test.GenericString
+         DirectIndexString      
+         RevString              
+         String                 
+         SubString              
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c}{\PYZsh{} Subtypes of Number}
+        \PY{n}{subtypes}\PY{p}{(}\PY{k+kt}{Number}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}6}]:} 2-element Array\{Union\{DataType, UnionAll\},1\}:
+         Complex
+         Real   
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c}{\PYZsh{} Subtypes of Real}
+        \PY{n}{subtypes}\PY{p}{(}\PY{k+kt}{Real}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} 4-element Array\{Union\{DataType, UnionAll\},1\}:
+         AbstractFloat
+         Integer      
+         Irrational   
+         Rational     
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c}{\PYZsh{} Subtypes of AbstractFloat}
+        \PY{n}{subtypes}\PY{p}{(}\PY{k+kt}{AbstractFloat}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} 4-element Array\{Union\{DataType, UnionAll\},1\}:
+         BigFloat
+         Float16 
+         Float32 
+         Float64 
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c}{\PYZsh{} Subtypes of Integer}
+        \PY{n}{subtypes}\PY{p}{(}\PY{k+kt}{Integer}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} 4-element Array\{Union\{DataType, UnionAll\},1\}:
+         BigInt  
+         Bool    
+         Signed  
+         Unsigned
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c}{\PYZsh{} Subtypes of Signed}
+         \PY{n}{subtypes}\PY{p}{(}\PY{k+kt}{Signed}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} 5-element Array\{Union\{DataType, UnionAll\},1\}:
+          Int128
+          Int16 
+          Int32 
+          Int64 
+          Int8  
+\end{Verbatim}
+            
+    Section \ref{in-this-lesson}
+
+    Declaring a type
+
+    A type is declared by the double colon, \texttt{::}, sign. To the left
+we place the value (or placeholder for a variable, i.e. a variable name)
+and to the right the actual type. In the example below we want to
+express the fact that the value \$ 2 + 2 \$ is an instance of a 64-bit
+integer.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{p}{(}\PY{l+m+mi}{2} \PY{o}{+} \PY{l+m+mi}{2}\PY{p}{)}\PY{o}{::}\PY{k+kt}{Int64}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} 4
+\end{Verbatim}
+            
+    If we typed \texttt{(2\ +\ 2)::Float64} we would get the following
+error:
+
+\begin{verbatim}
+LoadError: TypeError: typeassert: expected Float64, got Int64
+while loading In[3], in expression starting on line 1
+\end{verbatim}
+
+We used the declaration of a type as an assertion, which allowed us to
+see that there was something wrong with our code. We can imagine a
+program where the \texttt{+()} (or a more complicated user-defined)
+function is called and we need the arguments to be of a certain type. An
+error such as the one above can give us information about what went
+wrong.
+
+    Declaring a type of a local variable (inside of a function), we state
+that the type should always remain the same. This is more like what
+would happen in a statically typed language. It is really helpful if we
+want an error to be thrown should the type of a variable be changed by
+another part of our code. This can lead to type instability. It can
+really impact the speed of execution.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{c}{\PYZsh{} Creating a function with a local variable}
+         \PY{k}{function} \PY{n}{static\PYZus{}local\PYZus{}variable}\PY{p}{(}\PY{p}{)}
+             \PY{n}{v}\PY{o}{::}\PY{k+kt}{Int16} \PY{o}{=} \PY{l+m+mi}{42}
+             \PY{k}{return} \PY{n}{v}
+         \PY{k}{end}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}12}]:} static\_local\_variable (generic function with 1 method)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c}{\PYZsh{} Calling the function}
+         \PY{n}{static\PYZus{}local\PYZus{}variable}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:} 42
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c}{\PYZsh{} Checking the type of the answer just give}
+         \PY{n}{typeof}\PY{p}{(}\PY{n}{ans}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} Int16
+\end{Verbatim}
+            
+    Remember that \texttt{v} is local to the function. If we try and look at
+it value by typing \texttt{v}, we would get the following error:
+
+\begin{verbatim}
+LoadError: UndefVarError: v not defined
+while loading In[7], in expression starting on line 1
+\end{verbatim}
+
+    Now that we know something about declaring a type, let's look at
+creating our own types.
+
+    Section \ref{in-this-lesson}
+
+    Type creation
+
+    As mentioned, we can create our own types. Consider a Cartesian
+coordinate system along two perpendicular axes, say \$ x \$ and \$ y \$.
+A vector in the plane can be represented as a type. The keyword we use
+to create a type is \texttt{type}. If we want instances of our type to
+be immutable, we use the keyword \texttt{immutable}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c}{\PYZsh{} Creating a concrete type called Vector\PYZus{}2D}
+         \PY{k}{type} \PY{n}{Vector\PYZus{}2D}
+             \PY{n}{x}\PY{o}{::}\PY{k+kt}{Float64} \PY{c}{\PYZsh{} x is a fieldname of the type and has an optional type}
+             \PY{n}{y}\PY{o}{::}\PY{k+kt}{Float64} \PY{c}{\PYZsh{} y is a fieldname of the type and has an optional type}
+         \PY{k}{end}
+\end{Verbatim}
+
+
+    This is actually a composite type, since we have fields. For a type that
+is non-composite we can imagine a simple wrapper around an already
+defined type, such as we do below.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c}{\PYZsh{} A non\PYZhy{}composite type}
+         \PY{k}{type} \PY{n}{NonComposite}
+             \PY{n}{x}\PY{o}{::}\PY{k+kt}{Float64}
+         \PY{k}{end}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{my\PYZus{}non\PYZus{}composite} \PY{o}{=} \PY{n}{NonComposite}\PY{p}{(}\PY{l+m+mi}{42}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} NonComposite(42.0)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c}{\PYZsh{} Type}
+         \PY{n}{typeof}\PY{p}{(}\PY{n}{ans}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} NonComposite
+\end{Verbatim}
+            
+    Back to the more exciting composite types. We can now instantiate the
+concrete type \texttt{Vector\_2D}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{vector\PYZus{}1} \PY{o}{=} \PY{n}{Vector\PYZus{}2D}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} Vector\_2D(2.0, 2.0)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{c}{\PYZsh{} The type of vector\PYZus{}1}
+         \PY{n}{typeof}\PY{p}{(}\PY{n}{vector\PYZus{}1}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} Vector\_2D
+\end{Verbatim}
+            
+    Notice how we get floating point values even though we gave two integer
+values. The \texttt{convert()} functions was created to change allowable
+values to 64-bit floating point values.
+
+    Also notice that it looks like we called a function when we typed
+\texttt{Vector\_2D(2,\ 2)}. When we define a type, constructors are
+created. They allow us to create an instance of that type (sometimes
+referred to as an \emph{object} of that type).
+
+    As with functions, we can access the methods that were created with the
+type.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{methods}\PY{p}{(}\PY{n}{Vector\PYZus{}2D}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} \# 3 methods for generic function "(::Type)":
+         Vector\_2D(x::Float64, y::Float64) in Main at In[15]:3
+         Vector\_2D(x, y) in Main at In[15]:3
+         (::Type\{T\})(arg) where T in Base at sysimg.jl:24
+\end{Verbatim}
+            
+    We can also access the fieldnames and their values. They are mutable,
+i.e. we can pass new values to them.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{c}{\PYZsh{} The available names (fields, fieldnames)}
+         \PY{c}{\PYZsh{} Note that they are of type Symbol}
+         \PY{n}{fieldnames}\PY{p}{(}\PY{n}{Vector\PYZus{}2D}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} 2-element Array\{Symbol,1\}:
+          :x
+          :y
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{c}{\PYZsh{} Getting the value of the :x field}
+         \PY{n}{vector\PYZus{}1}\PY{o}{.}\PY{n}{x}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} 2.0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{c}{\PYZsh{} Alternative syntax using the field\PYZsq{}s symbol representation}
+         \PY{n}{getfield}\PY{p}{(}\PY{n}{vector\PYZus{}1}\PY{p}{,} \PY{o}{:}\PY{n}{x}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} 2.0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{c}{\PYZsh{} Another alternative notation using the index number of the fields}
+         \PY{n}{getfield}\PY{p}{(}\PY{n}{vector\PYZus{}1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} 2.0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{vector\PYZus{}1}\PY{o}{.}\PY{n}{x} \PY{o}{=} \PY{l+m+mi}{3}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:} 3
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{vector\PYZus{}1}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}27}]:} Vector\_2D(3.0, 2.0)
+\end{Verbatim}
+            
+    Another way to pass a value to a fieldname in a type is the
+\texttt{setfield()} function. We have to use the correct type for the
+value. If we use an integer such as
+\texttt{setfield!(vector\_1,\ :x,\ 4)} we would get the follwoing error:
+
+\begin{verbatim}
+LoadError: TypeError: setfield!: expected Float64, got Int64
+while loading In[25], in expression starting on line 1
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{c}{\PYZsh{} Now we have to use a floating point value}
+         \PY{n}{setfield!}\PY{p}{(}\PY{n}{vector\PYZus{}1}\PY{p}{,} \PY{o}{:}\PY{n}{x}\PY{p}{,} \PY{l+m+mf}{4.0}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} 4.0
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{c}{\PYZsh{} vector\PYZus{}1 has been changed}
+         \PY{n}{vector\PYZus{}1}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}29}]:} Vector\_2D(4.0, 2.0)
+\end{Verbatim}
+            
+    Section \ref{in-this-lesson}
+
+    Convertion and promotion
+
+    Before we go any further, we must have a look behind the scenes. Above
+we saw that an integer was converted to a floating point value as
+specified for the fields of our new type.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{c}{\PYZsh{} Using the convert function}
+         \PY{n}{convert}\PY{p}{(}\PY{k+kt}{Float64}\PY{p}{,} \PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}30}]:} 10.0
+\end{Verbatim}
+            
+    If precision is lost, convertion will result in an error. For instance,
+\texttt{convert(Int16,\ 10.1)} will return:
+
+\begin{verbatim}
+adError: InexactError()
+while loading In[20], in expression starting on line 1
+\end{verbatim}
+
+Using \texttt{convert(Int16,\ 10.0)} will return a value of \$ 10 \$,
+though.
+
+    Julia has a type promotion system that will try to incorporate values
+into a single type. If we pass an integer and a floating point value,
+the integer will be promoted to a floating point value.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{promote}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mf}{10.0}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}31}]:} (10.0, 10.0)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{typeof}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}32}]:} Int64
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{typeof}\PY{p}{(}\PY{l+m+mf}{10.0}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}33}]:} Float64
+\end{Verbatim}
+            
+    This promotion to a common type lifts the lid on multiple dispatch when
+a function is called with unspecified argument types (i.e.
+\texttt{Any}).
+
+    Section \ref{in-this-lesson}
+
+    Parametrizing a type
+
+    When creating a user type, we need not specify the type explicitely. We
+could use a parameter. Have a look at the example below.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{k}{type} \PY{n}{Vector\PYZus{}3D}\PY{p}{\PYZob{}}\PY{n}{T}\PY{p}{\PYZcb{}}
+             \PY{n}{x}\PY{o}{::}\PY{n}{T}
+             \PY{n}{y}\PY{o}{::}\PY{n}{T}
+             \PY{n}{z}\PY{o}{::}\PY{n}{T}
+         \PY{k}{end}
+\end{Verbatim}
+
+
+    We use \$ T \$ as a parameter placeholder. When we instantiate the type
+we can use any appropriate type, as long as all the fields values are of
+the same type.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{c}{\PYZsh{} Using 64 bit integers}
+         \PY{n}{vector\PYZus{}2} \PY{o}{=} \PY{n}{Vector\PYZus{}3D}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,} \PY{l+m+mi}{12}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:} Vector\_3D\{Int64\}(10, 12, 8)
+\end{Verbatim}
+            
+    If we were to execute \texttt{vector\_2\ =\ Vector\_3D(10.1,\ 10,\ 8)},
+we would get the following error:
+
+\begin{verbatim}
+LoadError: MethodError: `convert` has no method matching convert(::Type{Vector_3D{T}}, ::Float64, ::Int64, ::Int64)
+This may have arisen from a call to the constructor Vector_3D{T}(...),
+since type constructors fall back to convert methods.
+Closest candidates are:
+  Vector_3D{T}(::T, !Matched::T, !Matched::T)
+  call{T}(::Type{T}, ::Any)
+  convert{T}(::Type{T}, !Matched::T)
+while loading In[28], in expression starting on line 1
+\end{verbatim}
+
+    We can constrain the parametric type. Below we allow all subtypes of of
+the abstract type \texttt{Real}.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{k}{type} \PY{n}{Vector\PYZus{}3D\PYZus{}Real}\PY{p}{\PYZob{}}\PY{n}{T} \PY{o}{\PYZlt{}:} \PY{k+kt}{Real}\PY{p}{\PYZcb{}}
+             \PY{n}{x}\PY{o}{::}\PY{n}{T}
+             \PY{n}{y}\PY{o}{::}\PY{n}{T}
+             \PY{n}{z}\PY{o}{::}\PY{n}{T}
+         \PY{k}{end}
+\end{Verbatim}
+
+
+    As an aside, we cannot redefine a type. If we would use:
+
+\begin{verbatim}
+type Vector_3D{T}
+    x::T
+    y::T
+    z::T
+end
+\end{verbatim}
+
+we would get the error:
+
+\begin{verbatim}
+LoadError: invalid redefinition of constant Vector_3D
+while loading In[98], in expression starting on line 1
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{c}{\PYZsh{} Creating a new instance}
+         \PY{n}{vector\PYZus{}3} \PY{o}{=} \PY{n}{Vector\PYZus{}3D\PYZus{}Real}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}37}]:} Vector\_3D\_Real\{Int64\}(3, 3, 3)
+\end{Verbatim}
+            
+    Section \ref{in-this-lesson}
+
+    The equality of values
+
+    When are two values equal? We use a double equal sign to return a
+Boolean value.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{c}{\PYZsh{} Using the functional notation}
+         \PY{o}{==}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mf}{5.0}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:} true
+\end{Verbatim}
+            
+    Numbers are immutable and are compared at the bit level. This includes
+their types. We can use the \texttt{===} sign or the \texttt{is()}
+function to check for equality.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{c}{\PYZsh{} New in 0.6}
+         \PY{o}{===}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mf}{5.0}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}41}]:} false
+\end{Verbatim}
+            
+    Where does this leave our user-defined types? We will see below that the
+address in memory is checked when dealing with more complex objects such
+as our user-defined, composite types.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{n}{vector\PYZus{}a} \PY{o}{=} \PY{n}{Vector\PYZus{}2D}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{)}
+         \PY{n}{vector\PYZus{}b} \PY{o}{=} \PY{n}{Vector\PYZus{}2D}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}42}]:} Vector\_2D(1.0, 1.0)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{c}{\PYZsh{} New in 0.6}
+         \PY{o}{===}\PY{p}{(}\PY{n}{vector\PYZus{}a}\PY{p}{,} \PY{n}{vector\PYZus{}b}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}44}]:} false
+\end{Verbatim}
+            
+    Section \ref{in-this-lesson}
+
+    Defining methods for functions that will use user-types
+
+    The summation function, \texttt{+()} has methods for adding different
+types. What if we want to add two instances of our \texttt{Vector\_2D}
+user-type? If we were to add \texttt{vector\_a} to \texttt{vector\_b} we
+would get the following error:
+
+\begin{verbatim}
+LoadError: MethodError: `+` has no method matching +(::Vector_2D, ::Vector_2D)
+Closest candidates are:
+  +(::Any, ::Any, !Matched::Any, !Matched::Any...)
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{c}{\PYZsh{} Base methods for the +() function}
+         \PY{n}{methods}\PY{p}{(}\PY{o}{+}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}45}]:} \# 180 methods for generic function "+":
+         +(x::Bool, z::Complex\{Bool\}) in Base at complex.jl:232
+         +(x::Bool, y::Bool) in Base at bool.jl:89
+         +(x::Bool) in Base at bool.jl:86
+         +(x::Bool, y::T) where T<:AbstractFloat in Base at bool.jl:96
+         +(x::Bool, z::Complex) in Base at complex.jl:239
+         +(a::Float16, b::Float16) in Base at float.jl:372
+         +(x::Float32, y::Float32) in Base at float.jl:374
+         +(x::Float64, y::Float64) in Base at float.jl:375
+         +(z::Complex\{Bool\}, x::Bool) in Base at complex.jl:233
+         +(z::Complex\{Bool\}, x::Real) in Base at complex.jl:247
+         +(x::Char, y::Integer) in Base at char.jl:40
+         +(c::BigInt, x::BigFloat) in Base.MPFR at mpfr.jl:312
+         +(a::BigInt, b::BigInt, c::BigInt, d::BigInt, e::BigInt) in Base.GMP at gmp.jl:334
+         +(a::BigInt, b::BigInt, c::BigInt, d::BigInt) in Base.GMP at gmp.jl:327
+         +(a::BigInt, b::BigInt, c::BigInt) in Base.GMP at gmp.jl:321
+         +(x::BigInt, y::BigInt) in Base.GMP at gmp.jl:289
+         +(x::BigInt, c::Union\{UInt16, UInt32, UInt8\}) in Base.GMP at gmp.jl:346
+         +(x::BigInt, c::Union\{Int16, Int32, Int8\}) in Base.GMP at gmp.jl:362
+         +(a::BigFloat, b::BigFloat, c::BigFloat, d::BigFloat, e::BigFloat) in Base.MPFR at mpfr.jl:460
+         +(a::BigFloat, b::BigFloat, c::BigFloat, d::BigFloat) in Base.MPFR at mpfr.jl:453
+         +(a::BigFloat, b::BigFloat, c::BigFloat) in Base.MPFR at mpfr.jl:447
+         +(x::BigFloat, c::BigInt) in Base.MPFR at mpfr.jl:308
+         +(x::BigFloat, y::BigFloat) in Base.MPFR at mpfr.jl:277
+         +(x::BigFloat, c::Union\{UInt16, UInt32, UInt8\}) in Base.MPFR at mpfr.jl:284
+         +(x::BigFloat, c::Union\{Int16, Int32, Int8\}) in Base.MPFR at mpfr.jl:292
+         +(x::BigFloat, c::Union\{Float16, Float32, Float64\}) in Base.MPFR at mpfr.jl:300
+         +(B::BitArray\{2\}, J::UniformScaling) in Base.LinAlg at linalg\textbackslash{}uniformscaling.jl:59
+         +(a::Base.Pkg.Resolve.VersionWeights.VWPreBuildItem, b::Base.Pkg.Resolve.VersionWeights.VWPreBuildItem) in Base.Pkg.Resolve.VersionWeights at pkg\textbackslash{}resolve\textbackslash{}versionweight.jl:87
+         +(a::Base.Pkg.Resolve.VersionWeights.VWPreBuild, b::Base.Pkg.Resolve.VersionWeights.VWPreBuild) in Base.Pkg.Resolve.VersionWeights at pkg\textbackslash{}resolve\textbackslash{}versionweight.jl:135
+         +(a::Base.Pkg.Resolve.VersionWeights.VersionWeight, b::Base.Pkg.Resolve.VersionWeights.VersionWeight) in Base.Pkg.Resolve.VersionWeights at pkg\textbackslash{}resolve\textbackslash{}versionweight.jl:197
+         +(a::Base.Pkg.Resolve.MaxSum.FieldValues.FieldValue, b::Base.Pkg.Resolve.MaxSum.FieldValues.FieldValue) in Base.Pkg.Resolve.MaxSum.FieldValues at pkg\textbackslash{}resolve\textbackslash{}fieldvalue.jl:44
+         +(x::Base.Dates.CompoundPeriod, y::Base.Dates.CompoundPeriod) in Base.Dates at dates\textbackslash{}periods.jl:349
+         +(x::Base.Dates.CompoundPeriod, y::Base.Dates.Period) in Base.Dates at dates\textbackslash{}periods.jl:347
+         +(x::Base.Dates.CompoundPeriod, y::Base.Dates.TimeType) in Base.Dates at dates\textbackslash{}periods.jl:387
+         +(x::Date, y::Base.Dates.Day) in Base.Dates at dates\textbackslash{}arithmetic.jl:77
+         +(x::Date, y::Base.Dates.Week) in Base.Dates at dates\textbackslash{}arithmetic.jl:75
+         +(dt::Date, z::Base.Dates.Month) in Base.Dates at dates\textbackslash{}arithmetic.jl:58
+         +(dt::Date, y::Base.Dates.Year) in Base.Dates at dates\textbackslash{}arithmetic.jl:32
+         +(dt::Date, t::Base.Dates.Time) in Base.Dates at dates\textbackslash{}arithmetic.jl:20
+         +(t::Base.Dates.Time, dt::Date) in Base.Dates at dates\textbackslash{}arithmetic.jl:24
+         +(x::Base.Dates.Time, y::Base.Dates.TimePeriod) in Base.Dates at dates\textbackslash{}arithmetic.jl:81
+         +(dt::DateTime, z::Base.Dates.Month) in Base.Dates at dates\textbackslash{}arithmetic.jl:52
+         +(dt::DateTime, y::Base.Dates.Year) in Base.Dates at dates\textbackslash{}arithmetic.jl:28
+         +(x::DateTime, y::Base.Dates.Period) in Base.Dates at dates\textbackslash{}arithmetic.jl:79
+         +(y::AbstractFloat, x::Bool) in Base at bool.jl:98
+         +(x::T, y::T) where T<:Union\{Int128, Int16, Int32, Int64, Int8, UInt128, UInt16, UInt32, UInt64, UInt8\} in Base at int.jl:32
+         +(x::Integer, y::Ptr) in Base at pointer.jl:128
+         +(z::Complex, w::Complex) in Base at complex.jl:221
+         +(z::Complex, x::Bool) in Base at complex.jl:240
+         +(x::Real, z::Complex\{Bool\}) in Base at complex.jl:246
+         +(x::Real, z::Complex) in Base at complex.jl:258
+         +(z::Complex, x::Real) in Base at complex.jl:259
+         +(x::Rational, y::Rational) in Base at rational.jl:245
+         +(x::Integer, y::Char) in Base at char.jl:41
+         +(i::Integer, index::CartesianIndex) in Base.IteratorsMD at multidimensional.jl:79
+         +(c::Union\{UInt16, UInt32, UInt8\}, x::BigInt) in Base.GMP at gmp.jl:350
+         +(c::Union\{Int16, Int32, Int8\}, x::BigInt) in Base.GMP at gmp.jl:363
+         +(c::Union\{UInt16, UInt32, UInt8\}, x::BigFloat) in Base.MPFR at mpfr.jl:288
+         +(c::Union\{Int16, Int32, Int8\}, x::BigFloat) in Base.MPFR at mpfr.jl:296
+         +(c::Union\{Float16, Float32, Float64\}, x::BigFloat) in Base.MPFR at mpfr.jl:304
+         +(x::Irrational, y::Irrational) in Base at irrationals.jl:109
+         +(x::Real, r::Base.Use\_StepRangeLen\_Instead) in Base at deprecated.jl:1223
+         +(x::Number) in Base at operators.jl:399
+         +(x::T, y::T) where T<:Number in Base at promotion.jl:335
+         +(x::Number, y::Number) in Base at promotion.jl:249
+         +(x::Real, r::AbstractUnitRange) in Base at range.jl:721
+         +(x::Number, r::AbstractUnitRange) in Base at range.jl:723
+         +(x::Number, r::StepRangeLen) in Base at range.jl:726
+         +(x::Number, r::LinSpace) in Base at range.jl:730
+         +(x::Number, r::Range) in Base at range.jl:724
+         +(r::Range, x::Number) in Base at range.jl:732
+         +(r1::OrdinalRange, r2::OrdinalRange) in Base at range.jl:882
+         +(r1::LinSpace\{T\}, r2::LinSpace\{T\}) where T in Base at range.jl:889
+         +(r1::StepRangeLen\{T,R,S\} where S, r2::StepRangeLen\{T,R,S\} where S) where \{R<:Base.TwicePrecision, T\} in Base at twiceprecision.jl:300
+         +(r1::StepRangeLen\{T,S,S\} where S, r2::StepRangeLen\{T,S,S\} where S) where \{T, S\} in Base at range.jl:905
+         +(r1::Union\{LinSpace, OrdinalRange, StepRangeLen\}, r2::Union\{LinSpace, OrdinalRange, StepRangeLen\}) in Base at range.jl:896
+         +(x::Base.TwicePrecision, y::Number) in Base at twiceprecision.jl:454
+         +(x::Number, y::Base.TwicePrecision) in Base at twiceprecision.jl:457
+         +(x::Base.TwicePrecision\{T\}, y::Base.TwicePrecision\{T\}) where T in Base at twiceprecision.jl:460
+         +(x::Base.TwicePrecision, y::Base.TwicePrecision) in Base at twiceprecision.jl:464
+         +(x::Ptr, y::Integer) in Base at pointer.jl:126
+         +(A::BitArray, B::BitArray) in Base at bitarray.jl:1176
+         +(A::SymTridiagonal, B::SymTridiagonal) in Base.LinAlg at linalg\textbackslash{}tridiag.jl:128
+         +(A::Tridiagonal, B::Tridiagonal) in Base.LinAlg at linalg\textbackslash{}tridiag.jl:624
+         +(A::UpperTriangular, B::UpperTriangular) in Base.LinAlg at linalg\textbackslash{}triangular.jl:374
+         +(A::LowerTriangular, B::LowerTriangular) in Base.LinAlg at linalg\textbackslash{}triangular.jl:375
+         +(A::UpperTriangular, B::Base.LinAlg.UnitUpperTriangular) in Base.LinAlg at linalg\textbackslash{}triangular.jl:376
+         +(A::LowerTriangular, B::Base.LinAlg.UnitLowerTriangular) in Base.LinAlg at linalg\textbackslash{}triangular.jl:377
+         +(A::Base.LinAlg.UnitUpperTriangular, B::UpperTriangular) in Base.LinAlg at linalg\textbackslash{}triangular.jl:378
+         +(A::Base.LinAlg.UnitLowerTriangular, B::LowerTriangular) in Base.LinAlg at linalg\textbackslash{}triangular.jl:379
+         +(A::Base.LinAlg.UnitUpperTriangular, B::Base.LinAlg.UnitUpperTriangular) in Base.LinAlg at linalg\textbackslash{}triangular.jl:380
+         +(A::Base.LinAlg.UnitLowerTriangular, B::Base.LinAlg.UnitLowerTriangular) in Base.LinAlg at linalg\textbackslash{}triangular.jl:381
+         +(A::Base.LinAlg.AbstractTriangular, B::Base.LinAlg.AbstractTriangular) in Base.LinAlg at linalg\textbackslash{}triangular.jl:382
+         +(A::Symmetric, x::Bool) in Base.LinAlg at linalg\textbackslash{}symmetric.jl:272
+         +(A::Symmetric, x::Number) in Base.LinAlg at linalg\textbackslash{}symmetric.jl:274
+         +(A::Hermitian, x::Bool) in Base.LinAlg at linalg\textbackslash{}symmetric.jl:272
+         +(A::Hermitian, x::Real) in Base.LinAlg at linalg\textbackslash{}symmetric.jl:274
+         +(Da::Diagonal, Db::Diagonal) in Base.LinAlg at linalg\textbackslash{}diagonal.jl:140
+         +(A::Bidiagonal, B::Bidiagonal) in Base.LinAlg at linalg\textbackslash{}bidiag.jl:330
+         +(UL::UpperTriangular, J::UniformScaling) in Base.LinAlg at linalg\textbackslash{}uniformscaling.jl:72
+         +(UL::Base.LinAlg.UnitUpperTriangular, J::UniformScaling) in Base.LinAlg at linalg\textbackslash{}uniformscaling.jl:75
+         +(UL::LowerTriangular, J::UniformScaling) in Base.LinAlg at linalg\textbackslash{}uniformscaling.jl:72
+         +(UL::Base.LinAlg.UnitLowerTriangular, J::UniformScaling) in Base.LinAlg at linalg\textbackslash{}uniformscaling.jl:75
+         +(A::Array, B::SparseMatrixCSC) in Base.SparseArrays at sparse\textbackslash{}sparsematrix.jl:1462
+         +(x::Union\{Base.ReshapedArray\{T,1,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:DenseArray, DenseArray\{T,1\}, SubArray\{T,1,A,I,L\} where L\} where I<:Tuple\{Vararg\{Union\{Base.AbstractCartesianIndex, Int64, Range\{Int64\}\},N\} where N\} where A<:Union\{Base.ReshapedArray\{T,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:DenseArray where N where T, DenseArray\} where T, y::AbstractSparseArray\{Tv,Ti,1\} where Ti where Tv) in Base.SparseArrays at sparse\textbackslash{}sparsevector.jl:1333
+         +(x::Union\{Base.ReshapedArray\{\#s267,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:DenseArray, DenseArray\{\#s267,N\}, SubArray\{\#s267,N,A,I,L\} where L\} where I<:Tuple\{Vararg\{Union\{Base.AbstractCartesianIndex, Int64, Range\{Int64\}\},N\} where N\} where A<:Union\{Base.ReshapedArray\{T,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:DenseArray where N where T, DenseArray\} where N where \#s267<:Union\{Base.Dates.CompoundPeriod, Base.Dates.Period\}) in Base.Dates at dates\textbackslash{}periods.jl:358
+         +(A::SparseMatrixCSC, J::UniformScaling) in Base.SparseArrays at sparse\textbackslash{}sparsematrix.jl:3512
+         +(A::AbstractArray\{TA,2\}, J::UniformScaling\{TJ\}) where \{TA, TJ\} in Base.LinAlg at linalg\textbackslash{}uniformscaling.jl:119
+         +(A::Diagonal, B::Bidiagonal) in Base.LinAlg at linalg\textbackslash{}special.jl:113
+         +(A::Bidiagonal, B::Diagonal) in Base.LinAlg at linalg\textbackslash{}special.jl:114
+         +(A::Diagonal, B::Tridiagonal) in Base.LinAlg at linalg\textbackslash{}special.jl:113
+         +(A::Tridiagonal, B::Diagonal) in Base.LinAlg at linalg\textbackslash{}special.jl:114
+         +(A::Diagonal, B::Array\{T,2\} where T) in Base.LinAlg at linalg\textbackslash{}special.jl:113
+         +(A::Array\{T,2\} where T, B::Diagonal) in Base.LinAlg at linalg\textbackslash{}special.jl:114
+         +(A::Bidiagonal, B::Tridiagonal) in Base.LinAlg at linalg\textbackslash{}special.jl:113
+         +(A::Tridiagonal, B::Bidiagonal) in Base.LinAlg at linalg\textbackslash{}special.jl:114
+         +(A::Bidiagonal, B::Array\{T,2\} where T) in Base.LinAlg at linalg\textbackslash{}special.jl:113
+         +(A::Array\{T,2\} where T, B::Bidiagonal) in Base.LinAlg at linalg\textbackslash{}special.jl:114
+         +(A::Tridiagonal, B::Array\{T,2\} where T) in Base.LinAlg at linalg\textbackslash{}special.jl:113
+         +(A::Array\{T,2\} where T, B::Tridiagonal) in Base.LinAlg at linalg\textbackslash{}special.jl:114
+         +(A::SymTridiagonal, B::Tridiagonal) in Base.LinAlg at linalg\textbackslash{}special.jl:122
+         +(A::Tridiagonal, B::SymTridiagonal) in Base.LinAlg at linalg\textbackslash{}special.jl:123
+         +(A::SymTridiagonal, B::Array\{T,2\} where T) in Base.LinAlg at linalg\textbackslash{}special.jl:122
+         +(A::Array\{T,2\} where T, B::SymTridiagonal) in Base.LinAlg at linalg\textbackslash{}special.jl:123
+         +(A::Diagonal, B::SymTridiagonal) in Base.LinAlg at linalg\textbackslash{}special.jl:131
+         +(A::SymTridiagonal, B::Diagonal) in Base.LinAlg at linalg\textbackslash{}special.jl:132
+         +(A::Bidiagonal, B::SymTridiagonal) in Base.LinAlg at linalg\textbackslash{}special.jl:131
+         +(A::SymTridiagonal, B::Bidiagonal) in Base.LinAlg at linalg\textbackslash{}special.jl:132
+         +(A::Diagonal, B::UpperTriangular) in Base.LinAlg at linalg\textbackslash{}special.jl:143
+         +(A::UpperTriangular, B::Diagonal) in Base.LinAlg at linalg\textbackslash{}special.jl:144
+         +(A::Diagonal, B::Base.LinAlg.UnitUpperTriangular) in Base.LinAlg at linalg\textbackslash{}special.jl:143
+         +(A::Base.LinAlg.UnitUpperTriangular, B::Diagonal) in Base.LinAlg at linalg\textbackslash{}special.jl:144
+         +(A::Diagonal, B::LowerTriangular) in Base.LinAlg at linalg\textbackslash{}special.jl:143
+         +(A::LowerTriangular, B::Diagonal) in Base.LinAlg at linalg\textbackslash{}special.jl:144
+         +(A::Diagonal, B::Base.LinAlg.UnitLowerTriangular) in Base.LinAlg at linalg\textbackslash{}special.jl:143
+         +(A::Base.LinAlg.UnitLowerTriangular, B::Diagonal) in Base.LinAlg at linalg\textbackslash{}special.jl:144
+         +(A::Base.LinAlg.AbstractTriangular, B::SymTridiagonal) in Base.LinAlg at linalg\textbackslash{}special.jl:150
+         +(A::SymTridiagonal, B::Base.LinAlg.AbstractTriangular) in Base.LinAlg at linalg\textbackslash{}special.jl:151
+         +(A::Base.LinAlg.AbstractTriangular, B::Tridiagonal) in Base.LinAlg at linalg\textbackslash{}special.jl:150
+         +(A::Tridiagonal, B::Base.LinAlg.AbstractTriangular) in Base.LinAlg at linalg\textbackslash{}special.jl:151
+         +(A::Base.LinAlg.AbstractTriangular, B::Bidiagonal) in Base.LinAlg at linalg\textbackslash{}special.jl:150
+         +(A::Bidiagonal, B::Base.LinAlg.AbstractTriangular) in Base.LinAlg at linalg\textbackslash{}special.jl:151
+         +(A::Base.LinAlg.AbstractTriangular, B::Array\{T,2\} where T) in Base.LinAlg at linalg\textbackslash{}special.jl:150
+         +(A::Array\{T,2\} where T, B::Base.LinAlg.AbstractTriangular) in Base.LinAlg at linalg\textbackslash{}special.jl:151
+         +(Y::Union\{Base.ReshapedArray\{\#s266,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:DenseArray, DenseArray\{\#s266,N\}, SubArray\{\#s266,N,A,I,L\} where L\} where I<:Tuple\{Vararg\{Union\{Base.AbstractCartesianIndex, Int64, Range\{Int64\}\},N\} where N\} where A<:Union\{Base.ReshapedArray\{T,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:DenseArray where N where T, DenseArray\} where N where \#s266<:Union\{Base.Dates.CompoundPeriod, Base.Dates.Period\}, x::Union\{Base.Dates.CompoundPeriod, Base.Dates.Period\}) in Base.Dates at dates\textbackslash{}periods.jl:363
+         +(X::Union\{Base.ReshapedArray\{\#s265,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:DenseArray, DenseArray\{\#s265,N\}, SubArray\{\#s265,N,A,I,L\} where L\} where I<:Tuple\{Vararg\{Union\{Base.AbstractCartesianIndex, Int64, Range\{Int64\}\},N\} where N\} where A<:Union\{Base.ReshapedArray\{T,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:DenseArray where N where T, DenseArray\} where N where \#s265<:Union\{Base.Dates.CompoundPeriod, Base.Dates.Period\}, Y::Union\{Base.ReshapedArray\{\#s264,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:DenseArray, DenseArray\{\#s264,N\}, SubArray\{\#s264,N,A,I,L\} where L\} where I<:Tuple\{Vararg\{Union\{Base.AbstractCartesianIndex, Int64, Range\{Int64\}\},N\} where N\} where A<:Union\{Base.ReshapedArray\{T,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:DenseArray where N where T, DenseArray\} where N where \#s264<:Union\{Base.Dates.CompoundPeriod, Base.Dates.Period\}) in Base.Dates at dates\textbackslash{}periods.jl:364
+         +(x::Union\{Base.ReshapedArray\{\#s267,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:DenseArray, DenseArray\{\#s267,N\}, SubArray\{\#s267,N,A,I,L\} where L\} where I<:Tuple\{Vararg\{Union\{Base.AbstractCartesianIndex, Int64, Range\{Int64\}\},N\} where N\} where A<:Union\{Base.ReshapedArray\{T,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:DenseArray where N where T, DenseArray\} where N where \#s267<:Union\{Base.Dates.CompoundPeriod, Base.Dates.Period\}, y::Base.Dates.TimeType) in Base.Dates at dates\textbackslash{}arithmetic.jl:86
+         +(r::Range\{\#s267\} where \#s267<:Base.Dates.TimeType, x::Base.Dates.Period) in Base.Dates at dates\textbackslash{}ranges.jl:47
+         +(A::SparseMatrixCSC, B::SparseMatrixCSC) in Base.SparseArrays at sparse\textbackslash{}sparsematrix.jl:1458
+         +(A::SparseMatrixCSC, B::Array) in Base.SparseArrays at sparse\textbackslash{}sparsematrix.jl:1461
+         +(x::AbstractSparseArray\{Tv,Ti,1\} where Ti where Tv, y::AbstractSparseArray\{Tv,Ti,1\} where Ti where Tv) in Base.SparseArrays at sparse\textbackslash{}sparsevector.jl:1332
+         +(x::AbstractSparseArray\{Tv,Ti,1\} where Ti where Tv, y::Union\{Base.ReshapedArray\{T,1,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:DenseArray, DenseArray\{T,1\}, SubArray\{T,1,A,I,L\} where L\} where I<:Tuple\{Vararg\{Union\{Base.AbstractCartesianIndex, Int64, Range\{Int64\}\},N\} where N\} where A<:Union\{Base.ReshapedArray\{T,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:DenseArray where N where T, DenseArray\} where T) in Base.SparseArrays at sparse\textbackslash{}sparsevector.jl:1334
+         +(x::AbstractArray\{\#s45,N\} where N where \#s45<:Number) in Base at abstractarraymath.jl:93
+         +(A::AbstractArray, B::AbstractArray) in Base at arraymath.jl:37
+         +(A::Number, B::AbstractArray) in Base at arraymath.jl:44
+         +(A::AbstractArray, B::Number) in Base at arraymath.jl:47
+         +(index1::CartesianIndex\{N\}, index2::CartesianIndex\{N\}) where N in Base.IteratorsMD at multidimensional.jl:70
+         +(index::CartesianIndex\{N\}, i::Integer) where N in Base.IteratorsMD at multidimensional.jl:80
+         +(J1::UniformScaling, J2::UniformScaling) in Base.LinAlg at linalg\textbackslash{}uniformscaling.jl:58
+         +(J::UniformScaling, B::BitArray\{2\}) in Base.LinAlg at linalg\textbackslash{}uniformscaling.jl:60
+         +(J::UniformScaling, A::AbstractArray\{T,2\} where T) in Base.LinAlg at linalg\textbackslash{}uniformscaling.jl:61
+         +(a::Base.Pkg.Resolve.VersionWeights.HierarchicalValue\{T\}, b::Base.Pkg.Resolve.VersionWeights.HierarchicalValue\{T\}) where T in Base.Pkg.Resolve.VersionWeights at pkg\textbackslash{}resolve\textbackslash{}versionweight.jl:23
+         +(x::P, y::P) where P<:Base.Dates.Period in Base.Dates at dates\textbackslash{}periods.jl:70
+         +(x::Base.Dates.Period, y::Base.Dates.Period) in Base.Dates at dates\textbackslash{}periods.jl:346
+         +(y::Base.Dates.Period, x::Base.Dates.CompoundPeriod) in Base.Dates at dates\textbackslash{}periods.jl:348
+         +(x::Union\{Base.Dates.CompoundPeriod, Base.Dates.Period\}) in Base.Dates at dates\textbackslash{}periods.jl:357
+         +(x::Union\{Base.Dates.CompoundPeriod, Base.Dates.Period\}, Y::Union\{Base.ReshapedArray\{\#s267,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:DenseArray, DenseArray\{\#s267,N\}, SubArray\{\#s267,N,A,I,L\} where L\} where I<:Tuple\{Vararg\{Union\{Base.AbstractCartesianIndex, Int64, Range\{Int64\}\},N\} where N\} where A<:Union\{Base.ReshapedArray\{T,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:DenseArray where N where T, DenseArray\} where N where \#s267<:Union\{Base.Dates.CompoundPeriod, Base.Dates.Period\}) in Base.Dates at dates\textbackslash{}periods.jl:362
+         +(x::Base.Dates.TimeType) in Base.Dates at dates\textbackslash{}arithmetic.jl:8
+         +(a::Base.Dates.TimeType, b::Base.Dates.Period, c::Base.Dates.Period) in Base.Dates at dates\textbackslash{}periods.jl:378
+         +(a::Base.Dates.TimeType, b::Base.Dates.Period, c::Base.Dates.Period, d::Base.Dates.Period{\ldots}) in Base.Dates at dates\textbackslash{}periods.jl:379
+         +(x::Base.Dates.TimeType, y::Base.Dates.CompoundPeriod) in Base.Dates at dates\textbackslash{}periods.jl:382
+         +(x::Base.Dates.Instant) in Base.Dates at dates\textbackslash{}arithmetic.jl:4
+         +(y::Base.Dates.Period, x::Base.Dates.TimeType) in Base.Dates at dates\textbackslash{}arithmetic.jl:83
+         +(x::AbstractArray\{\#s267,N\} where N where \#s267<:Base.Dates.TimeType, y::Union\{Base.Dates.CompoundPeriod, Base.Dates.Period\}) in Base.Dates at dates\textbackslash{}arithmetic.jl:85
+         +(x::Base.Dates.Period, r::Range\{\#s267\} where \#s267<:Base.Dates.TimeType) in Base.Dates at dates\textbackslash{}ranges.jl:46
+         +(y::Union\{Base.Dates.CompoundPeriod, Base.Dates.Period\}, x::AbstractArray\{\#s267,N\} where N where \#s267<:Base.Dates.TimeType) in Base.Dates at dates\textbackslash{}arithmetic.jl:87
+         +(y::Base.Dates.TimeType, x::Union\{Base.ReshapedArray\{\#s267,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:DenseArray, DenseArray\{\#s267,N\}, SubArray\{\#s267,N,A,I,L\} where L\} where I<:Tuple\{Vararg\{Union\{Base.AbstractCartesianIndex, Int64, Range\{Int64\}\},N\} where N\} where A<:Union\{Base.ReshapedArray\{T,N,A,MI\} where MI<:Tuple\{Vararg\{Base.MultiplicativeInverses.SignedMultiplicativeInverse\{Int64\},N\} where N\} where A<:DenseArray where N where T, DenseArray\} where N where \#s267<:Union\{Base.Dates.CompoundPeriod, Base.Dates.Period\}) in Base.Dates at dates\textbackslash{}arithmetic.jl:88
+         +(J::UniformScaling, x::Number) in Base at deprecated.jl:56
+         +(x::Number, J::UniformScaling) in Base at deprecated.jl:56
+         +(a, b, c, xs{\ldots}) in Base at operators.jl:424
+\end{Verbatim}
+            
+    We have to create a method.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{k}{import} \PY{n}{Base}\PY{o}{.+}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{o}{+}\PY{p}{(}\PY{n}{u}\PY{o}{::}\PY{n}{Vector\PYZus{}2D}\PY{p}{,} \PY{n}{v}\PY{o}{::}\PY{n}{Vector\PYZus{}2D}\PY{p}{)} \PY{o}{=} \PY{n}{Vector\PYZus{}2D}\PY{p}{(}\PY{n}{u}\PY{o}{.}\PY{n}{x} \PY{o}{+} \PY{n}{v}\PY{o}{.}\PY{n}{x}\PY{p}{,} \PY{n}{u}\PY{o}{.}\PY{n}{y} \PY{o}{+} \PY{n}{v}\PY{o}{.}\PY{n}{y}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}47}]:} + (generic function with 181 methods)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{o}{+}\PY{p}{(}\PY{n}{vector\PYZus{}a}\PY{p}{,} \PY{n}{vector\PYZus{}b}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}48}]:} Vector\_2D(2.0, 2.0)
+\end{Verbatim}
+            
+    Section \ref{in-this-lesson}
+
+    Constraining field values
+
+    We can well imagine needing to constain the values that a type can hold.
+Below we create the Bloodpressure type with two fields that hold integer
+values. They cannot be negative and the systolic blood pressure must be
+higher than the diastolic blood pressure. We solve this problem by
+creating an inner constructor.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{k}{type} \PY{n}{BloodPressure}
+             \PY{c}{\PYZsh{} Don\PYZsq{}t leave as Any}
+             \PY{n}{systolic}\PY{o}{::}\PY{k+kt}{Int16}
+             \PY{n}{diastolic}\PY{o}{::}\PY{k+kt}{Int16}
+             \PY{k}{function} \PY{n}{BloodPressure}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{d}\PY{p}{)}
+                 \PY{c}{\PYZsh{} Using short\PYZhy{}circuit evaluations \PYZam{}\PYZam{} and ||}
+                 \PY{n}{s} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0} \PY{o}{\PYZam{}\PYZam{}} \PY{n}{throw}\PY{p}{(}\PY{k+kt}{ArgumentError}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{N}\PY{l+s}{e}\PY{l+s}{g}\PY{l+s}{a}\PY{l+s}{t}\PY{l+s}{i}\PY{l+s}{v}\PY{l+s}{e}\PY{l+s}{ }\PY{l+s}{p}\PY{l+s}{r}\PY{l+s}{e}\PY{l+s}{s}\PY{l+s}{s}\PY{l+s}{u}\PY{l+s}{r}\PY{l+s}{e}\PY{l+s}{s}\PY{l+s}{ }\PY{l+s}{a}\PY{l+s}{r}\PY{l+s}{e}\PY{l+s}{ }\PY{l+s}{n}\PY{l+s}{o}\PY{l+s}{t}\PY{l+s}{ }\PY{l+s}{a}\PY{l+s}{l}\PY{l+s}{l}\PY{l+s}{o}\PY{l+s}{w}\PY{l+s}{e}\PY{l+s}{d}\PY{l+s}{!}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{s} \PY{o}{\PYZlt{}=} \PY{n}{d} \PY{o}{\PYZam{}\PYZam{}} \PY{n}{throw}\PY{p}{(}\PY{k+kt}{ArgumentError}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{T}\PY{l+s}{h}\PY{l+s}{e}\PY{l+s}{ }\PY{l+s}{s}\PY{l+s}{y}\PY{l+s}{s}\PY{l+s}{t}\PY{l+s}{o}\PY{l+s}{l}\PY{l+s}{i}\PY{l+s}{c}\PY{l+s}{ }\PY{l+s}{b}\PY{l+s}{l}\PY{l+s}{o}\PY{l+s}{o}\PY{l+s}{d}\PY{l+s}{ }\PY{l+s}{p}\PY{l+s}{r}\PY{l+s}{e}\PY{l+s}{s}\PY{l+s}{s}\PY{l+s}{u}\PY{l+s}{r}\PY{l+s}{e}\PY{l+s}{ }\PY{l+s}{m}\PY{l+s}{u}\PY{l+s}{s}\PY{l+s}{t}\PY{l+s}{ }\PY{l+s}{b}\PY{l+s}{e}\PY{l+s}{ }\PY{l+s}{h}\PY{l+s}{i}\PY{l+s}{g}\PY{l+s}{h}\PY{l+s}{e}\PY{l+s}{r}\PY{l+s}{ }\PY{l+s}{t}\PY{l+s}{h}\PY{l+s}{a}\PY{l+s}{n}\PY{l+s}{ }\PY{l+s}{t}\PY{l+s}{h}\PY{l+s}{e}\PY{l+s}{ }\PY{l+s}{d}\PY{l+s}{i}\PY{l+s}{a}\PY{l+s}{s}\PY{l+s}{t}\PY{l+s}{o}\PY{l+s}{l}\PY{l+s}{i}\PY{l+s}{c}\PY{l+s}{ }\PY{l+s}{b}\PY{l+s}{l}\PY{l+s}{o}\PY{l+s}{o}\PY{l+s}{d}\PY{l+s}{ }\PY{l+s}{p}\PY{l+s}{r}\PY{l+s}{e}\PY{l+s}{s}\PY{l+s}{s}\PY{l+s}{u}\PY{l+s}{r}\PY{l+s}{e}\PY{l+s}{!}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{isa}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{k+kt}{Integer}\PY{p}{)} \PY{o}{||} \PY{n}{throw}\PY{p}{(}\PY{k+kt}{ArgumentError}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{O}\PY{l+s}{n}\PY{l+s}{l}\PY{l+s}{y}\PY{l+s}{ }\PY{l+s}{i}\PY{l+s}{n}\PY{l+s}{t}\PY{l+s}{e}\PY{l+s}{g}\PY{l+s}{e}\PY{l+s}{r}\PY{l+s}{ }\PY{l+s}{v}\PY{l+s}{a}\PY{l+s}{l}\PY{l+s}{u}\PY{l+s}{e}\PY{l+s}{s}\PY{l+s}{ }\PY{l+s}{a}\PY{l+s}{l}\PY{l+s}{l}\PY{l+s}{o}\PY{l+s}{w}\PY{l+s}{e}\PY{l+s}{d}\PY{l+s}{!}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{isa}\PY{p}{(}\PY{n}{d}\PY{p}{,} \PY{k+kt}{Integer}\PY{p}{)} \PY{o}{||} \PY{n}{throw}\PY{p}{(}\PY{k+kt}{ArgumentError}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{O}\PY{l+s}{n}\PY{l+s}{l}\PY{l+s}{y}\PY{l+s}{ }\PY{l+s}{i}\PY{l+s}{n}\PY{l+s}{t}\PY{l+s}{e}\PY{l+s}{g}\PY{l+s}{e}\PY{l+s}{r}\PY{l+s}{ }\PY{l+s}{v}\PY{l+s}{a}\PY{l+s}{l}\PY{l+s}{u}\PY{l+s}{e}\PY{l+s}{s}\PY{l+s}{ }\PY{l+s}{a}\PY{l+s}{l}\PY{l+s}{l}\PY{l+s}{o}\PY{l+s}{w}\PY{l+s}{e}\PY{l+s}{d}\PY{l+s}{!}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{new}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{d}\PY{p}{)}
+             \PY{k}{end}
+         \PY{k}{end}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{bp\PYZus{}1} \PY{o}{=} \PY{n}{BloodPressure}\PY{p}{(}\PY{l+m+mi}{120}\PY{p}{,} \PY{l+m+mi}{80}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}50}]:} BloodPressure(120, 80)
+\end{Verbatim}
+            
+    Using \texttt{bp\_2\ =\ BloodPressure(-1,\ 90)} will result in the
+error:
+
+\begin{verbatim}
+LoadError: ArgumentError: Negative pressures are not allowed!
+while loading In[32], in expression starting on line 1
+\end{verbatim}
+
+    Using \texttt{bp\_2\ =\ BloodPressure(80,\ 120)} will result in the
+error:
+
+\begin{verbatim}
+LoadError: ArgumentError: The systolic blood pressure must be higher than the diastolic blood pressure
+while loading In[56], in expression starting on line 1
+\end{verbatim}
+
+    Using \texttt{bp\_2\ =\ BloodPressure(120.0,\ 80)} will result in the
+error:
+
+\begin{verbatim}
+LoadError: ArgumentError: Only integer values allowed!
+while loading In[95], in expression starting on line 1
+\end{verbatim}
+
+    Beware. Using inner constructors with parametrized types can lead to
+problems.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{k}{type} \PY{n}{BloodPressureParametrized}\PY{p}{\PYZob{}}\PY{n}{T} \PY{o}{\PYZlt{}:} \PY{k+kt}{Real}\PY{p}{\PYZcb{}}
+             \PY{c}{\PYZsh{} Don\PYZsq{}t leave as Any}
+             \PY{n}{systolic}\PY{o}{::}\PY{n}{T}
+             \PY{n}{diastolic}\PY{o}{::}\PY{n}{T}
+             \PY{k}{function} \PY{n}{BloodPressureParametrized}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{d}\PY{p}{)}
+                 \PY{n}{s} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0} \PY{o}{\PYZam{}\PYZam{}} \PY{n}{throw}\PY{p}{(}\PY{k+kt}{ArgumentError}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{N}\PY{l+s}{e}\PY{l+s}{g}\PY{l+s}{a}\PY{l+s}{t}\PY{l+s}{i}\PY{l+s}{v}\PY{l+s}{e}\PY{l+s}{ }\PY{l+s}{p}\PY{l+s}{r}\PY{l+s}{e}\PY{l+s}{s}\PY{l+s}{s}\PY{l+s}{u}\PY{l+s}{r}\PY{l+s}{e}\PY{l+s}{s}\PY{l+s}{ }\PY{l+s}{a}\PY{l+s}{r}\PY{l+s}{e}\PY{l+s}{ }\PY{l+s}{n}\PY{l+s}{o}\PY{l+s}{t}\PY{l+s}{ }\PY{l+s}{a}\PY{l+s}{l}\PY{l+s}{l}\PY{l+s}{o}\PY{l+s}{w}\PY{l+s}{e}\PY{l+s}{d}\PY{l+s}{!}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{s} \PY{o}{\PYZlt{}=} \PY{n}{d} \PY{o}{\PYZam{}\PYZam{}} \PY{n}{throw}\PY{p}{(}\PY{k+kt}{ArgumentError}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{T}\PY{l+s}{h}\PY{l+s}{e}\PY{l+s}{ }\PY{l+s}{s}\PY{l+s}{y}\PY{l+s}{s}\PY{l+s}{t}\PY{l+s}{o}\PY{l+s}{l}\PY{l+s}{i}\PY{l+s}{c}\PY{l+s}{ }\PY{l+s}{b}\PY{l+s}{l}\PY{l+s}{o}\PY{l+s}{o}\PY{l+s}{d}\PY{l+s}{ }\PY{l+s}{p}\PY{l+s}{r}\PY{l+s}{e}\PY{l+s}{s}\PY{l+s}{s}\PY{l+s}{u}\PY{l+s}{r}\PY{l+s}{e}\PY{l+s}{ }\PY{l+s}{m}\PY{l+s}{u}\PY{l+s}{s}\PY{l+s}{t}\PY{l+s}{ }\PY{l+s}{b}\PY{l+s}{e}\PY{l+s}{ }\PY{l+s}{h}\PY{l+s}{i}\PY{l+s}{g}\PY{l+s}{h}\PY{l+s}{e}\PY{l+s}{r}\PY{l+s}{ }\PY{l+s}{t}\PY{l+s}{h}\PY{l+s}{a}\PY{l+s}{n}\PY{l+s}{ }\PY{l+s}{t}\PY{l+s}{h}\PY{l+s}{e}\PY{l+s}{ }\PY{l+s}{d}\PY{l+s}{i}\PY{l+s}{a}\PY{l+s}{s}\PY{l+s}{t}\PY{l+s}{o}\PY{l+s}{l}\PY{l+s}{i}\PY{l+s}{c}\PY{l+s}{ }\PY{l+s}{b}\PY{l+s}{l}\PY{l+s}{o}\PY{l+s}{o}\PY{l+s}{d}\PY{l+s}{ }\PY{l+s}{p}\PY{l+s}{r}\PY{l+s}{e}\PY{l+s}{s}\PY{l+s}{s}\PY{l+s}{u}\PY{l+s}{r}\PY{l+s}{e}\PY{l+s}{!}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{isa}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{k+kt}{Integer}\PY{p}{)} \PY{o}{||} \PY{n}{throw}\PY{p}{(}\PY{k+kt}{ArgumentError}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{O}\PY{l+s}{n}\PY{l+s}{l}\PY{l+s}{y}\PY{l+s}{ }\PY{l+s}{i}\PY{l+s}{n}\PY{l+s}{t}\PY{l+s}{e}\PY{l+s}{g}\PY{l+s}{e}\PY{l+s}{r}\PY{l+s}{ }\PY{l+s}{v}\PY{l+s}{a}\PY{l+s}{l}\PY{l+s}{u}\PY{l+s}{e}\PY{l+s}{s}\PY{l+s}{ }\PY{l+s}{a}\PY{l+s}{l}\PY{l+s}{l}\PY{l+s}{o}\PY{l+s}{w}\PY{l+s}{e}\PY{l+s}{d}\PY{l+s}{!}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{isa}\PY{p}{(}\PY{n}{d}\PY{p}{,} \PY{k+kt}{Integer}\PY{p}{)} \PY{o}{||} \PY{n}{throw}\PY{p}{(}\PY{k+kt}{ArgumentError}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{O}\PY{l+s}{n}\PY{l+s}{l}\PY{l+s}{y}\PY{l+s}{ }\PY{l+s}{i}\PY{l+s}{n}\PY{l+s}{t}\PY{l+s}{e}\PY{l+s}{g}\PY{l+s}{e}\PY{l+s}{r}\PY{l+s}{ }\PY{l+s}{v}\PY{l+s}{a}\PY{l+s}{l}\PY{l+s}{u}\PY{l+s}{e}\PY{l+s}{s}\PY{l+s}{ }\PY{l+s}{a}\PY{l+s}{l}\PY{l+s}{l}\PY{l+s}{o}\PY{l+s}{w}\PY{l+s}{e}\PY{l+s}{d}\PY{l+s}{!}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{new}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{d}\PY{p}{)}
+             \PY{k}{end}
+         \PY{k}{end}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+WARNING: deprecated syntax "inner constructor BloodPressureParametrized({\ldots}) around In[51]:6".
+Use "BloodPressureParametrized\{T\}({\ldots}) where T" instead.
+
+    \end{Verbatim}
+
+    Using \texttt{bp\_3\ =\ BloodPressureParametrized(120,\ 80)} will result
+in the error; ``\texttt{LoadError:\ MethodError:}convert` has no method
+matching
+convert(::Type\{BloodPressureParametrized\{T\textless{}:Real\}\},
+::Int64, ::Int64) This may have arisen from a call to the constructor
+BloodPressureParametrized\{T\textless{}:Real\}(...), since type
+constructors fall back to convert methods. Closest candidates are:
+call\{T\}(::Type\{T\}, ::Any) convert\{T\}(::Type\{T\}, !Matched::T)
+while loading In{[}102{]}, in expression starting on line 1
+
+in call at essentials.jl:57 ```
+
+    Now we have to specify the type during the instantiation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{n}{bp\PYZus{}3} \PY{o}{=} \PY{n}{BloodPressureParametrized}\PY{p}{\PYZob{}}\PY{k+kt}{Int}\PY{p}{\PYZcb{}}\PY{p}{(}\PY{l+m+mi}{120}\PY{p}{,} \PY{l+m+mi}{80}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}52}]:} BloodPressureParametrized\{Int64\}(120, 80)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{k}{type} \PY{n}{BloodPressureParametrizedFixed}\PY{p}{\PYZob{}}\PY{n}{T} \PY{o}{\PYZlt{}:} \PY{k+kt}{Real}\PY{p}{\PYZcb{}}
+             \PY{n}{systolic}\PY{o}{::}\PY{n}{T}
+             \PY{n}{diastolic}\PY{o}{::}\PY{n}{T}
+             \PY{k}{function} \PY{n}{BloodPressureParametrizedFixed}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{d}\PY{p}{)}
+                 \PY{n}{s} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0} \PY{o}{\PYZam{}\PYZam{}} \PY{n}{throw}\PY{p}{(}\PY{k+kt}{ArgumentError}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{N}\PY{l+s}{e}\PY{l+s}{g}\PY{l+s}{a}\PY{l+s}{t}\PY{l+s}{i}\PY{l+s}{v}\PY{l+s}{e}\PY{l+s}{ }\PY{l+s}{p}\PY{l+s}{r}\PY{l+s}{e}\PY{l+s}{s}\PY{l+s}{s}\PY{l+s}{u}\PY{l+s}{r}\PY{l+s}{e}\PY{l+s}{s}\PY{l+s}{ }\PY{l+s}{a}\PY{l+s}{r}\PY{l+s}{e}\PY{l+s}{ }\PY{l+s}{n}\PY{l+s}{o}\PY{l+s}{t}\PY{l+s}{ }\PY{l+s}{a}\PY{l+s}{l}\PY{l+s}{l}\PY{l+s}{o}\PY{l+s}{w}\PY{l+s}{e}\PY{l+s}{d}\PY{l+s}{!}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{s} \PY{o}{\PYZlt{}=} \PY{n}{d} \PY{o}{\PYZam{}\PYZam{}} \PY{n}{throw}\PY{p}{(}\PY{k+kt}{ArgumentError}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{T}\PY{l+s}{h}\PY{l+s}{e}\PY{l+s}{ }\PY{l+s}{s}\PY{l+s}{y}\PY{l+s}{s}\PY{l+s}{t}\PY{l+s}{o}\PY{l+s}{l}\PY{l+s}{i}\PY{l+s}{c}\PY{l+s}{ }\PY{l+s}{b}\PY{l+s}{l}\PY{l+s}{o}\PY{l+s}{o}\PY{l+s}{d}\PY{l+s}{ }\PY{l+s}{p}\PY{l+s}{r}\PY{l+s}{e}\PY{l+s}{s}\PY{l+s}{s}\PY{l+s}{u}\PY{l+s}{r}\PY{l+s}{e}\PY{l+s}{ }\PY{l+s}{m}\PY{l+s}{u}\PY{l+s}{s}\PY{l+s}{t}\PY{l+s}{ }\PY{l+s}{b}\PY{l+s}{e}\PY{l+s}{ }\PY{l+s}{h}\PY{l+s}{i}\PY{l+s}{g}\PY{l+s}{h}\PY{l+s}{e}\PY{l+s}{r}\PY{l+s}{ }\PY{l+s}{t}\PY{l+s}{h}\PY{l+s}{a}\PY{l+s}{n}\PY{l+s}{ }\PY{l+s}{t}\PY{l+s}{h}\PY{l+s}{e}\PY{l+s}{ }\PY{l+s}{d}\PY{l+s}{i}\PY{l+s}{a}\PY{l+s}{s}\PY{l+s}{t}\PY{l+s}{o}\PY{l+s}{l}\PY{l+s}{i}\PY{l+s}{c}\PY{l+s}{ }\PY{l+s}{b}\PY{l+s}{l}\PY{l+s}{o}\PY{l+s}{o}\PY{l+s}{d}\PY{l+s}{ }\PY{l+s}{p}\PY{l+s}{r}\PY{l+s}{e}\PY{l+s}{s}\PY{l+s}{s}\PY{l+s}{u}\PY{l+s}{r}\PY{l+s}{e}\PY{l+s}{!}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{new}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{d}\PY{p}{)}
+             \PY{k}{end}
+         \PY{k}{end}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+WARNING: deprecated syntax "inner constructor BloodPressureParametrizedFixed({\ldots}) around In[53]:5".
+Use "BloodPressureParametrizedFixed\{T\}({\ldots}) where T" instead.
+
+    \end{Verbatim}
+
+    We can fix this by the assignment below.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{c}{\PYZsh{} A bit of an effort}
+         \PY{n}{BloodPressureParametrizedFixed}\PY{p}{\PYZob{}}\PY{n}{T}\PY{p}{\PYZcb{}}\PY{p}{(}\PY{n}{systolic}\PY{o}{::}\PY{n}{T}\PY{p}{,} \PY{n}{diastolic}\PY{o}{::}\PY{n}{T}\PY{p}{)} \PY{o}{=} \PY{n}{BloodPressureParametrizedFixed}\PY{p}{\PYZob{}}\PY{n}{T}\PY{p}{\PYZcb{}}\PY{p}{(}\PY{n}{systolic}\PY{p}{,} \PY{n}{diastolic}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}54}]:} BloodPressureParametrizedFixed
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{n}{bp\PYZus{}4} \PY{o}{=} \PY{n}{BloodPressureParametrizedFixed}\PY{p}{(}\PY{l+m+mi}{120}\PY{p}{,} \PY{l+m+mi}{80}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}55}]:} BloodPressureParametrizedFixed\{Int64\}(120, 80)
+\end{Verbatim}
+            
+    We can get way more specific. In the code below we tell Julia that if we
+pass integers to the type, they should be expressed as floating point
+values.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n}{BloodPressureParametrizedFixed}\PY{p}{\PYZob{}}\PY{n}{T} \PY{o}{\PYZlt{}:} \PY{k+kt}{Int}\PY{p}{\PYZcb{}}\PY{p}{(}\PY{n}{systolic}\PY{o}{::}\PY{n}{T}\PY{p}{,} \PY{n}{diastolic}\PY{o}{::}\PY{n}{T}\PY{p}{)} \PY{o}{=} \PY{n}{BloodPressureParametrizedFixed}\PY{p}{\PYZob{}}\PY{k+kt}{Float64}\PY{p}{\PYZcb{}}\PY{p}{(}\PY{n}{systolic}\PY{p}{,} \PY{n}{diastolic}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}56}]:} BloodPressureParametrizedFixed
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{bp\PYZus{}5} \PY{o}{=} \PY{n}{BloodPressureParametrizedFixed}\PY{p}{(}\PY{l+m+mi}{120}\PY{p}{,} \PY{l+m+mi}{80}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}57}]:} BloodPressureParametrizedFixed\{Float64\}(120.0, 80.0)
+\end{Verbatim}
+            
+    Section \ref{in-this-lesson}
+
+    More complex parameters
+
+    Up until now we have constrained ourselves to a single parameter. It is
+possible, though, to create more than one. Below we create a type called
+\texttt{Relook}. It has one fieldname called \texttt{duration}, which
+must be of subtype, \texttt{Real}. There is also a second parameter.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{k}{type} \PY{n}{Relook}\PY{p}{\PYZob{}}\PY{n}{N}\PY{p}{,} \PY{n}{T}\PY{o}{\PYZlt{}:}\PY{k+kt}{Real}\PY{p}{\PYZcb{}}
+             \PY{n}{duration}\PY{o}{::}\PY{n}{T}
+         \PY{k}{end}
+\end{Verbatim}
+
+
+    Using \texttt{patient\_1\ =\ Relook(3,\ 60)} will result in the error:
+
+\begin{verbatim}
+LoadError: MethodError: `convert` has no method matching convert(::Type{Relook{N,T}}, ::Int64, ::Int64)
+This may have arisen from a call to the constructor Relook{N,T}(...),
+since type constructors fall back to convert methods.
+Closest candidates are:
+  call{T}(::Type{T}, ::Any)
+  convert{T}(::Type{T}, !Matched::T)
+while loading In[175], in expression starting on line 1
+
+ in call at essentials.jl:57
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{c}{\PYZsh{} We have to specify the type of the second parameter}
+         \PY{n}{patient\PYZus{}1} \PY{o}{=} \PY{n}{Relook}\PY{p}{\PYZob{}}\PY{l+m+mi}{4}\PY{p}{,} \PY{k+kt}{Int16}\PY{p}{\PYZcb{}}\PY{p}{(}\PY{l+m+mi}{60}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}59}]:} Relook\{4,Int16\}(60)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{n}{patient\PYZus{}1}\PY{o}{.}\PY{n}{duration}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}60}]:} 60
+\end{Verbatim}
+            
+    We now want to add only objects (instances) with the same value in the
+first parameter.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{o}{+}\PY{p}{\PYZob{}}\PY{n}{N}\PY{p}{,} \PY{n}{T}\PY{p}{\PYZcb{}}\PY{p}{(}\PY{n}{u}\PY{o}{::}\PY{n}{Relook}\PY{p}{\PYZob{}}\PY{n}{N}\PY{p}{,} \PY{n}{T}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{v}\PY{o}{::}\PY{n}{Relook}\PY{p}{\PYZob{}}\PY{n}{N}\PY{p}{,} \PY{n}{T}\PY{p}{\PYZcb{}}\PY{p}{)} \PY{o}{=} \PY{n}{Relook}\PY{p}{\PYZob{}}\PY{n}{N}\PY{p}{,} \PY{n}{T}\PY{p}{\PYZcb{}}\PY{p}{(}\PY{n}{u}\PY{o}{.}\PY{n}{duration} \PY{o}{+} \PY{n}{v}\PY{o}{.}\PY{n}{duration}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}61}]:} + (generic function with 182 methods)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{n}{patient\PYZus{}2} \PY{o}{=} \PY{n}{Relook}\PY{p}{\PYZob{}}\PY{l+m+mi}{4}\PY{p}{,} \PY{k+kt}{Int16}\PY{p}{\PYZcb{}}\PY{p}{(}\PY{l+m+mi}{70}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}62}]:} Relook\{4,Int16\}(70)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{n}{patient\PYZus{}1} \PY{o}{+} \PY{n}{patient\PYZus{}2}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}63}]:} Relook\{4,Int16\}(130)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n}{patient\PYZus{}3} \PY{o}{=} \PY{n}{Relook}\PY{p}{\PYZob{}}\PY{l+m+mi}{3}\PY{p}{,} \PY{k+kt}{Int16}\PY{p}{\PYZcb{}}\PY{p}{(}\PY{l+m+mi}{70}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}64}]:} Relook\{3,Int16\}(70)
+\end{Verbatim}
+            
+    Using \texttt{patient\_1\ +\ patient\_3} will now result in the error:
+\texttt{LoadError:\ MethodError:\ `+`\ has\ no\ method\ matching\ +(::Relook\{4,Int16\},\ ::Relook\{3,Int16\})\ Closest\ candidates\ are:\ \ \ +(::Any,\ ::Any,\ !Matched::Any,\ !Matched::Any...)\ \ \ +\{N,T\}(::Relook\{N,T\},\ !Matched::Relook\{N,T\})\ while\ loading\ In{[}191{]},\ in\ expression\ starting\ on\ line\ 1}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{n}{patient\PYZus{}4} \PY{o}{=} \PY{n}{Relook}\PY{p}{\PYZob{}}\PY{l+m+mf}{4.0}\PY{p}{,} \PY{k+kt}{Int16}\PY{p}{\PYZcb{}}\PY{p}{(}\PY{l+m+mi}{70}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}65}]:} Relook\{4.0,Int16\}(70)
+\end{Verbatim}
+            
+    Using \texttt{patient\_1\ +\ patient\_4} will also result in an error,
+because the types of \texttt{N} do not match. The error would be:
+
+\begin{verbatim}
+LoadError: MethodError: `+` has no method matching +(::Relook{4,Int16}, ::Relook{4.0,Int16})
+Closest candidates are:
+  +(::Any, ::Any, !Matched::Any, !Matched::Any...)
+  +{N,T}(::Relook{N,T}, !Matched::Relook{N,T})
+  +{N,T1,T2}(::Relook{N,T1}, !Matched::Relook{N,T2})
+while loading In[210], in expression starting on line 1
+\end{verbatim}
+
+    Below we fix the fieldname type mismatch.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{o}{+}\PY{p}{\PYZob{}}\PY{n}{N}\PY{p}{,} \PY{n}{T1}\PY{p}{,} \PY{n}{T2}\PY{p}{\PYZcb{}}\PY{p}{(}\PY{n}{u}\PY{o}{::}\PY{n}{Relook}\PY{p}{\PYZob{}}\PY{n}{N}\PY{p}{,} \PY{n}{T1}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{v}\PY{o}{::}\PY{n}{Relook}\PY{p}{\PYZob{}}\PY{n}{N}\PY{p}{,} \PY{n}{T2}\PY{p}{\PYZcb{}}\PY{p}{)} \PY{o}{=} \PY{n}{Relook}\PY{p}{\PYZob{}}\PY{n}{N}\PY{p}{,} \PY{n}{promote\PYZus{}type}\PY{p}{(}\PY{n}{T1}\PY{p}{,} \PY{n}{T2}\PY{p}{)}\PY{p}{\PYZcb{}}\PY{p}{(}\PY{n}{u}\PY{o}{.}\PY{n}{duration} \PY{o}{+} \PY{n}{v}\PY{o}{.}\PY{n}{duration}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}66}]:} + (generic function with 183 methods)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{n}{patient\PYZus{}5} \PY{o}{=} \PY{n}{Relook}\PY{p}{\PYZob{}}\PY{l+m+mi}{4}\PY{p}{,} \PY{k+kt}{Float64}\PY{p}{\PYZcb{}}\PY{p}{(}\PY{l+m+mi}{60}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}67}]:} Relook\{4,Float64\}(60.0)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{c}{\PYZsh{} N = 4 for both patient\PYZus{}1 and patient\PYZus{}5}
+         \PY{c}{\PYZsh{} T for patient\PYZus{}1 is Int16 and T for patient\PYZus{}2 is Float64}
+         \PY{n}{patient\PYZus{}1} \PY{o}{+} \PY{n}{patient\PYZus{}5}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}68}]:} Relook\{4,Float64\}(120.0)
+\end{Verbatim}
+            
+    If we want to throw an error if the number of relooks are not equal when
+trying to add to obejcts of the \texttt{Relook} type, we can do the
+following.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{o}{+}\PY{p}{\PYZob{}}\PY{n}{N1}\PY{p}{,} \PY{n}{N2}\PY{p}{,} \PY{n}{T}\PY{p}{\PYZcb{}}\PY{p}{(}\PY{n}{u}\PY{o}{::}\PY{n}{Relook}\PY{p}{\PYZob{}}\PY{n}{N1}\PY{p}{,} \PY{n}{T}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{v}\PY{o}{::}\PY{n}{Relook}\PY{p}{\PYZob{}}\PY{n}{N2}\PY{p}{,} \PY{n}{T}\PY{p}{\PYZcb{}}\PY{p}{)} \PY{o}{=} 
+         \PY{n}{throw}\PY{p}{(}\PY{k+kt}{ArgumentError}\PY{p}{(}\PY{l+s}{\PYZdq{}}\PY{l+s}{C}\PY{l+s}{a}\PY{l+s}{n}\PY{l+s}{n}\PY{l+s}{o}\PY{l+s}{t}\PY{l+s}{ }\PY{l+s}{a}\PY{l+s}{d}\PY{l+s}{d}\PY{l+s}{ }\PY{l+s}{d}\PY{l+s}{u}\PY{l+s}{r}\PY{l+s}{a}\PY{l+s}{t}\PY{l+s}{i}\PY{l+s}{o}\PY{l+s}{n}\PY{l+s}{s}\PY{l+s}{ }\PY{l+s}{w}\PY{l+s}{h}\PY{l+s}{e}\PY{l+s}{n}\PY{l+s}{ }\PY{l+s}{t}\PY{l+s}{h}\PY{l+s}{e}\PY{l+s}{ }\PY{l+s}{n}\PY{l+s}{u}\PY{l+s}{m}\PY{l+s}{b}\PY{l+s}{e}\PY{l+s}{r}\PY{l+s}{ }\PY{l+s}{o}\PY{l+s}{f}\PY{l+s}{ }\PY{l+s}{r}\PY{l+s}{e}\PY{l+s}{l}\PY{l+s}{o}\PY{l+s}{o}\PY{l+s}{k}\PY{l+s}{s}\PY{l+s}{ }\PY{l+s}{d}\PY{l+s}{o}\PY{l+s}{ }\PY{l+s}{n}\PY{l+s}{o}\PY{l+s}{t}\PY{l+s}{ }\PY{l+s}{m}\PY{l+s}{a}\PY{l+s}{t}\PY{l+s}{c}\PY{l+s}{h}\PY{l+s}{.}\PY{l+s}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}69}]:} + (generic function with 184 methods)
+\end{Verbatim}
+            
+    Using \texttt{patient\_1\ +\ patient\_3} will now result in the error:
+
+\begin{verbatim}
+LoadError: ArgumentError: Cannot add durations when the number of relooks do not match.
+while loading In[237], in expression starting on line 1
+
+ in + at In[236]:1
+\end{verbatim}
+
+    What about calculating the natural logarithm of the duration of a
+\texttt{Relook} object? We could just specify the field name.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{n}{log}\PY{p}{(}\PY{n}{patient\PYZus{}1}\PY{o}{.}\PY{n}{duration}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}70}]:} 4.0943445622221
+\end{Verbatim}
+            
+    Better still, we could specify wat the \texttt{log} function actually
+does with a \texttt{Relook} object.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{k}{import} \PY{n}{Base}\PY{o}{.}\PY{n}{log}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{n}{log}\PY{p}{(}\PY{n}{u}\PY{o}{::}\PY{n}{Relook}\PY{p}{)} \PY{o}{=} \PY{n}{log}\PY{p}{(}\PY{n}{u}\PY{o}{.}\PY{n}{duration}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}72}]:} log (generic function with 19 methods)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{n}{log}\PY{p}{(}\PY{n}{patient\PYZus{}1}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}73}]:} 4.0943445622221
+\end{Verbatim}
+            
+    We can specify a \texttt{convert} method that will convert all our
+\texttt{Relook} objects to numerical values which we can pass to Julia
+functions.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}74}]:} \PY{k}{import} \PY{n}{Base}\PY{o}{.}\PY{n}{convert}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} \PY{c}{\PYZsh{} The float() function tries to convert a value to a floating point value}
+         \PY{n}{convert}\PY{p}{(}\PY{o}{::}\PY{k+kt}{Type}\PY{p}{\PYZob{}}\PY{k+kt}{AbstractFloat}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{u}\PY{o}{::}\PY{n}{Relook}\PY{p}{)} \PY{o}{=} \PY{n}{float}\PY{p}{(}\PY{n}{u}\PY{o}{.}\PY{n}{duration}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}75}]:} convert (generic function with 708 methods)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}76}]:} \PY{c}{\PYZsh{} Covreting our Relook object and passing it to log10()}
+         \PY{n}{log10}\PY{p}{(}\PY{n}{convert}\PY{p}{(}\PY{k+kt}{AbstractFloat}\PY{p}{,} \PY{n}{patient\PYZus{}1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}76}]:} 1.7781512503836436
+\end{Verbatim}
+            
+    Section \ref{in-this-lesson}
+
+    Screen output of a user-defined type
+
+    We can create some meaning to our types by the way an object of the type
+is represented on the screen. Above we just saw two values we
+instantiation our type \texttt{Relook}. Let's change that a bit by
+overloading the \texttt{show} function.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}77}]:} \PY{k}{import} \PY{n}{Base}\PY{o}{.}\PY{n}{show}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}78}]:} \PY{n}{show}\PY{p}{\PYZob{}}\PY{n}{N}\PY{p}{,} \PY{n}{T}\PY{p}{\PYZcb{}}\PY{p}{(}\PY{n}{io}\PY{o}{::}\PY{k+kt}{IO}\PY{p}{,} \PY{n}{u}\PY{o}{::}\PY{n}{Relook}\PY{p}{\PYZob{}}\PY{n}{N}\PY{p}{,} \PY{n}{T}\PY{p}{\PYZcb{}}\PY{p}{)} \PY{o}{=} \PY{n}{print}\PY{p}{(}\PY{n}{io}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{P}\PY{l+s}{a}\PY{l+s}{t}\PY{l+s}{i}\PY{l+s}{e}\PY{l+s}{n}\PY{l+s}{t}\PY{l+s}{ }\PY{l+s}{w}\PY{l+s}{i}\PY{l+s}{t}\PY{l+s}{h}\PY{l+s}{ }\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{N}\PY{p}{,} \PY{l+s}{\PYZdq{}}\PY{l+s}{ }\PY{l+s}{r}\PY{l+s}{e}\PY{l+s}{l}\PY{l+s}{o}\PY{l+s}{o}\PY{l+s}{k}\PY{l+s}{ }\PY{l+s}{p}\PY{l+s}{r}\PY{l+s}{o}\PY{l+s}{c}\PY{l+s}{e}\PY{l+s}{d}\PY{l+s}{u}\PY{l+s}{r}\PY{l+s}{e}\PY{l+s}{s}\PY{l+s}{ }\PY{l+s}{t}\PY{l+s}{o}\PY{l+s}{t}\PY{l+s}{a}\PY{l+s}{l}\PY{l+s}{l}\PY{l+s}{i}\PY{l+s}{n}\PY{l+s}{g}\PY{l+s}{ }\PY{l+s}{\PYZdq{}}\PY{p}{,} \PY{n}{u}\PY{o}{.}\PY{n}{duration}\PY{p}{,}
+         \PY{l+s}{\PYZdq{}}\PY{l+s}{ }\PY{l+s}{m}\PY{l+s}{i}\PY{l+s}{n}\PY{l+s}{u}\PY{l+s}{t}\PY{l+s}{e}\PY{l+s}{s}\PY{l+s}{.}\PY{l+s}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}78}]:} show (generic function with 268 methods)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}79}]:} \PY{n}{patient\PYZus{}6} \PY{o}{=} \PY{n}{Relook}\PY{p}{\PYZob{}}\PY{l+m+mi}{4}\PY{p}{,} \PY{k+kt}{Int16}\PY{p}{\PYZcb{}}\PY{p}{(}\PY{l+m+mi}{60}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}79}]:} Patient with 4 relook procedures totalling 60 minutes.
+\end{Verbatim}
+            
+    Section \ref{in-this-lesson}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
